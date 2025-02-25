@@ -55,6 +55,9 @@ SHELL_mainLoop__spaceTwice:         ; 2回目以降に押されたSpaceの処理
 SHELL_execute:
     ; === シェルコマンドを実行 ===
 
+    cmp bx, 0       ; 入力が空か
+    je SHELL_start  ; プロンプト開始へ戻る
+
     mov byte [BUF_input + bx], 0    ; 文字列終端を追加
     call IO_printStr                ; 改行
 
