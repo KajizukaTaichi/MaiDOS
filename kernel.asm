@@ -27,7 +27,7 @@ SHELL_mainLoop:
     cmp al, ' '                 ; Spaceキーかチェック (0x0D = CR)
     je SHELL_mainLoop__space    ; 押されたら引数解析
 
-    cmp al, 0x08        ; Backspaceキーかチェック (0x08 = BS)
+    cmp al, 0x08                ; Backspaceキーかチェック (0x08 = BS)
     je IO_backspace
 
     call IO_printChar           ; 入力文字を画面に表示
@@ -40,15 +40,15 @@ SHELL_mainLoop__space:
     call IO_printChar               ; 入力文字を画面に表示
 
     cmp dh, 0                       ; Spaceがすでに入力されたかどうか
-    jne SHELL_mainLoop__spaceSecond
+    jne SHELL_mainLoop__spaceTwice
 
     mov byte [BUF_input + bx], 0    ; Null文字をバッファに追加
     inc bx                          ; バッファを指すbxを進める
     inc dh                          ; Space入力フラグを立てる
     jmp SHELL_mainLoop              ; ループ継続
 
-SHELL_mainLoop__spaceSecond:
-    mov byte [BUF_input + bx], ' '  ; Null文字をバッファに追加
+SHELL_mainLoop__spaceTwice:         ; 2回目以降に押されたSpaceの処理
+    mov byte [BUF_input + bx], ' '  ; Space文字をバッファに追加
     inc bx                          ; バッファを指すbxを進める
     jmp SHELL_mainLoop              ; ループ継続
 
