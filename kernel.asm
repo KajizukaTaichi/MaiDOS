@@ -69,6 +69,9 @@ SHELL_execute:
 
     jmp SHELL_start         ; プロンプト開始へ戻る
 
+
+; === カーネル ===
+
 KERNEL_launchApp:
     ; == アプリを起動 ==
 
@@ -102,6 +105,7 @@ KERNEL_launchApp:
     call IO_printStr
 
 KERNEL_appSuccess:
+    ; == プロセス終了(成功) ==
     ret
 
 
