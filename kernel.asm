@@ -30,9 +30,6 @@ SHELL_mainLoop:
     cmp al, 0x08        ; Backspaceキーかチェック (0x08 = BS)
     je IO_backspace
 
-    cmp bx, 49          ; バッファが一杯なら入力を制限
-    jae SHELL_mainLoop
-
     call IO_printChar           ; 入力文字を画面に表示
     mov [BUF_input + bx], al    ; 入力をバッファに追加
     inc bx                      ; バッファを指すbxを進める
@@ -134,9 +131,12 @@ APP_help:
     jmp KERNEL_appSuccess
 
 APP_exit:
-    ;  == CPU停止 ==
-    cli
-    hlt
+    ;  == シャットダウン ==
+    mov ax, 0x5307      ; APM機能：Set Power State（電源状態の設定）
+    mov bx, 1           ; デバイス番号（通常は1を指定、全デバイスに対して）
+    mov cx, 3           ; 電源状態 3：シャットダウン（完全に電源オフする状態）
+    int 15h             ; BIOS割り込み15hを呼び出してAPM関数を実行
+
 
 ; === 文字列操作 ===
 
@@ -221,7 +221,7 @@ VAL_msgHelp db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
     'Commands: echo, clear, help, exit', 0
 
 ; コマンド入力受け付け用バッファ領域
-BUF_input times 50 db 0
+BUF_input times 30 db 0
 
 ; 残りのバイト列を埋める
 times 510-($-$$) db 0
