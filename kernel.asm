@@ -5,14 +5,14 @@ welcome:
 
     mov si, VAL_msgWelcome  ; 起動メッセージ
     call IO_printStr
-    call IO_printNewLine
-    call IO_printNewLine
+    call IO_printNewLine    ; 改行して見やすくする
 
 
 ; === シェル ===
 
 SHELL_start:
-    mov si, VAL_shPrompt    ; プロンプト文字列を表示
+    call IO_printNewLine    ; 改行
+    mov si, VAL_shPrompt    ; シェルのプロンプト文字列を表示
     call IO_printStr
 
     mov bx, 0   ; 入力バッファのインデックスを初期化
@@ -65,7 +65,6 @@ SHELL_execute:
     call KERNEL_launchApp
 
     call IO_printNewLine    ; 2回改行
-    call IO_printNewLine
 
     jmp SHELL_start         ; プロンプト開始へ戻る
 
@@ -224,7 +223,7 @@ VAL_msgHelp db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
     'Commands: echo, clear, help, exit', 0
 
 ; コマンド入力受け付け用バッファ領域
-BUF_input times 30 db 0
+BUF_input times 10 db 0
 
 ; 残りのバイト列を埋める
 times 510-($-$$) db 0
