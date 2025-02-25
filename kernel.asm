@@ -125,7 +125,7 @@ APP_clear:
 
 APP_help:
     ; == ヘルプを表示 ==
-    mov si, VAL_msgHelp    ; ヘルプを表示
+    mov si, VAL_msgHelp
     call IO_printStr
     jmp KERNEL_appSuccess
 
