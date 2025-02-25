@@ -1,6 +1,4 @@
-# MaiDOS
-
-![](https://github.com/user-attachments/assets/7c5fffd2-d883-4c6b-bc1b-1f2c7092b148)
+![MaidOS Running Screenshot](https://github.com/user-attachments/assets/7c5fffd2-d883-4c6b-bc1b-1f2c7092b148)
 
 ## 起動方法
 
