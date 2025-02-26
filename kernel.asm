@@ -3,7 +3,7 @@
 welcome:
     call APP_clear          ; BIOSの画面をクリア
 
-    mov si, VAL_msgWelcome  ; 起動メッセージ
+    mov si, VAL_msg_welcome  ; 起動メッセージ
     call IO_printStr
     call IO_printNewLine    ; 改行して見やすくする
 
@@ -75,30 +75,30 @@ KERNEL_launchApp:
     ; == アプリを起動 ==
 
     mov si, BUF_input       ; 表示
-    mov di, VAL_shCmdEcho
+    mov di, VAL_cmdLet_echo
     call STR_compare        ; 入力とコマンド名"echo"が同じか比較
     cmp ax, 1               ; ならば実行する
     je APP_echo
 
     mov si, BUF_input       ; 画面クリア
-    mov di, VAL_shCmdClear
+    mov di, VAL_cmdLet_clear
     call STR_compare        ; 入力とコマンド名"clear"が同じか比較
     cmp ax, 1               ; ならば実行する
     je APP_clear
 
     mov si, BUF_input       ; ヘルプ
-    mov di, VAL_shCmdHelp
+    mov di, VAL_cmdLet_help
     call STR_compare        ; 入力とコマンド名"help"が同じか比較
     cmp ax, 1               ; ならば実行する
     je APP_help
 
     mov si, BUF_input       ; 終了
-    mov di, VAL_shCmdExit
-    call STR_compare        ; 入力とコマンド名"exit"が同じか比較
+    mov di, VAL_cmdLet_shutdown
+    call STR_compare        ; 入力とコマンド名"shutdown"が同じか比較
     cmp ax, 1               ; ならば実行する
-    je APP_exit
+    je APP_shutdown
 
-    mov si, VAL_msgError    ; マッチしない場合
+    mov si, VAL_msg_error    ; マッチしない場合
     call IO_printStr
     mov si, BUF_input       ; エラーメッセージを出力
     call IO_printStr
@@ -128,11 +128,11 @@ APP_clear:
 
 APP_help:
     ; == ヘルプを表示 ==
-    mov si, VAL_msgHelp
+    mov si, VAL_msg_help
     call IO_printStr
     jmp KERNEL_appSuccess
 
-APP_exit:
+APP_shutdown:
     ;  == シャットダウン ==
     mov ax, 0x5307      ; APM機能：Set Power State（電源状態の設定）
     mov bx, 1           ; デバイス番号（通常は1を指定、全デバイスに対して）
@@ -210,17 +210,17 @@ VAL_shPrompt db '[sh]> ', 0
 VAL_newLine db 0x0D, 0x0A, 0
 
 ; コマンド群
-VAL_shCmdEcho db 'echo', 0
-VAL_shCmdClear db 'clear', 0
-VAL_shCmdHelp db 'help', 0
-VAL_shCmdExit db 'exit', 0
+VAL_cmdLet_echo db 'echo', 0
+VAL_cmdLet_clear db 'clear', 0
+VAL_cmdLet_help db 'help', 0
+VAL_cmdLet_shutdown db 'shutdown', 0
 
 ; メッセージ群
-VAL_msgWelcome db 'Welcome back to computer, master!', 0
-VAL_msgError db 'Error! unknown command: ', 0
-VAL_msgHelp db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
+VAL_msg_welcome db 'Welcome back to computer, master!', 0
+VAL_msg_error db 'Error! unknown command: ', 0
+VAL_msg_help db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
     '(c) 2025 Kajizuka Taichi', 0x0D, 0x0A, \
-    'Commands: echo, clear, help, exit', 0
+    'Commands: echo, clear, help, shutdown', 0
 
 ; コマンド入力受け付け用バッファ領域
 BUF_input times 10 db 0
