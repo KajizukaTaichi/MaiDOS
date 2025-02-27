@@ -105,6 +105,10 @@ KERNEL_launchApp:
 
 KERNEL_appSuccess:
     ; == プロセス終了(成功) ==
+    mov edi, BUF_input
+    mov ecx, 16         ; バッファ初期化
+    xor eax, eax
+    rep stosd
     ret
 
 
@@ -216,14 +220,17 @@ VAL_cmdLet_help db 'help', 0
 VAL_cmdLet_shutdown db 'shutdown', 0
 
 ; メッセージ群
-VAL_msg_welcome db 'Welcome back to computer, master!', 0
-VAL_msg_error db 'Error! unknown command: ', 0
-VAL_msg_help db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
+VAL_msg_welcome:
+    db 'Welcome back to computer, master!', 0
+VAL_msg_error:
+    db 'Error! unknown command: ', 0
+VAL_msg_help:
+    db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
     '(c) 2025 Kajizuka Taichi', 0x0D, 0x0A, \
     'Commands: echo, clear, help, shutdown', 0
 
 ; コマンド入力受け付け用バッファ領域
-BUF_input times 10 db 0
+BUF_input times 16 db 0
 
 ; 残りのバイト列を埋める
 times 510-($-$$) db 0
