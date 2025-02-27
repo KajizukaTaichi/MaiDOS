@@ -98,7 +98,7 @@ KERNEL_launchApp:
     cmp ax, 1               ; ならば実行する
     je APP_shutdown
 
-    mov si, VAL_msg_error    ; マッチしない場合
+    mov si, VAL_msg_error   ; マッチしない場合
     call IO_printStr
     mov si, BUF_input       ; エラーメッセージを出力
     call IO_printStr
