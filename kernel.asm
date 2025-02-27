@@ -105,10 +105,6 @@ KERNEL_launchApp:
 
 KERNEL_appSuccess:
     ; == プロセス終了(成功) ==
-    mov edi, BUF_input
-    mov ecx, 16         ; バッファ初期化
-    xor eax, eax
-    rep stosd
     ret
 
 
