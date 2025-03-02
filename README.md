@@ -1,4 +1,4 @@
-![MaidOS Running Screenshot](https://github.com/user-attachments/assets/7c5fffd2-d883-4c6b-bc1b-1f2c7092b148)
+![MaiDOS Running Screenshot](https://github.com/user-attachments/assets/7c5fffd2-d883-4c6b-bc1b-1f2c7092b148)
 
 ## セットアップ
 
@@ -13,7 +13,7 @@ make
 
 - **make:**
   ビルド作業を自動化するツールです。
-  先ほどのコードの3行目で`make`するのに使います
+  先ほどのコードの3行目で`make`するのに使います。
 - **nasm:** 
   アセンブラです。
   ソースコード(`kernel.asm`)から機械語のバイナリを出力するのに使います。
