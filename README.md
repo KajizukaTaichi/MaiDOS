@@ -1,5 +1,4 @@
-![MaiDOS Running Screenshot](https://github.com/user-attachments/assets/7c5fffd2-d883-4c6b-bc1b-1f2c7092b148)
-
+![MaiDOS Running Screenshot](https://github.com/user-attachments/assets/66a97405-c7a7-4efe-a9b0-4f069cba36f2)
 ## セットアップ
 
 このリポジトリを**git**でお使いのPCにクローンして、**make**でビルドして起動します。
