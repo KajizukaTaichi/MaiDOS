@@ -223,7 +223,7 @@ VAL_msg_error:
 VAL_msg_help:
     db 'MaiDOS v0.2.5', 0x0D, 0x0A, \
     '(c) 2025 Kajizuka Taichi', 0x0D, 0x0A, \
-    'Commands: echo, clear, help, shutdown', 0
+    'Apps: echo, clear, help, shutdown', 0
 
 ; コマンド入力受け付け用バッファ領域
 BUF_input times 16 db 0
